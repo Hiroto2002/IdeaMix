@@ -1,0 +1,64 @@
+<section class="center-vertical">
+	<h1><%= session[:user][:name]%>の投稿</h1>
+		<% unless @posts.empty? %>
+			<% @posts.each do |user_post|%>
+				<div class='post center-vertical'>
+					<img src="<%=user_post["img"]%>">
+					<p>アーティスト: <%=user_post["artist"]%></p>
+					<p>アルバム: <%=user_post["album"]%></p>
+					<p>曲名: <%=user_post["music"]%></p>
+					<p><a href="<%=user_post["link"]%>">サンプル</a></p>
+					<p>コメント:<%=user_post["comment"]%></p>
+					<p>
+						投稿者: <%=session[:user][:name]%>
+					</p>
+					<p>いいねしたユーザー</p>
+					<div class="user-box">
+					<% user_post[:user_imges].each do |img|%>
+						<img src="<%= img %>" alt='user_imge' width='40' height='40'/>
+					<% end %>
+					</div>
+					<p><a href="/post/<%=user_post["id"] %>/delete">削除</a></p>
+					<p><a href="/post/<%=user_post["id"] %>/edit">編集</a></p>
+				</div>
+			<% end %>
+		<% else %>
+			<p>投稿がありません</p>
+		<% end %>
+</section>
+
+<section class="center-vertical">
+	<h1><%= session[:user][:name]%>のイイねした投稿</h1>
+		<% unless @like_posts.empty? %>
+			<% @like_posts.each do |like_post|%>
+			<div class='post center-vertical'>
+				<img src="<%=like_post["img"]%>">
+				<p>アーティスト: <%=like_post["artist"]%></p>
+				<p>アルバム: <%=like_post["album"]%></p>
+				<p>曲名: <%=like_post["music"]%></p>
+				<p><a href="<%=like_post["link"]%>">サンプル</a></p>
+				<p>コメント:<%=like_post["comment"]%></p>
+				<p>
+					投稿者: <%=session[:user][:name]%>
+				</p>
+				<p>いいねしたユーザー</p>
+				<div class="user-box">
+					<% like_post[:user_imges].each do |img|%>
+						<img src="<%= img %>" alt='user_imge' width='40' height='40'/>
+					<% end %>
+				</div>
+			</div>
+			<% end %>
+		<% else %>
+			<p>いいねがありません</p>
+		<% end %>
+</section>
+
+<!--<section class="center-vertical">-->
+<!--	<h1>〇〇のフォロー</h1>-->
+<!--	<a href="#">フォロー解除</a><br>-->
+<!--</section>-->
+
+<!--<section class="center-vertical">-->
+<!--	<h1>〇〇のフォロワー</h1>-->
+<!--</section>-->
