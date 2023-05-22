@@ -1,7 +1,7 @@
 default_env: &default
   adapter: postgresql
   encoding: unicode
-  database: c_music_sns
+  database: c_idea_mix
 
 development:
   <<: *default
