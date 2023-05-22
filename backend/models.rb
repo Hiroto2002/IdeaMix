@@ -7,6 +7,9 @@ class Post < ActiveRecord::Base
     has_many:likes
     has_many:users, :through => :likes
     belongs_to :user
+    has_many:nouns
+    has_many:verbs
+    has_many:categories
 end
 
 class User < ActiveRecord::Base
@@ -18,9 +21,27 @@ class User < ActiveRecord::Base
         length:{in: 5..10}
     has_many:likes
     has_many:post,:through => :likes
+    has_many:comments
 end
 
 class Like < ActiveRecord::Base
     belongs_to:user
     belongs_to:post
+end
+
+class Noun < ActiveRecord::Base
+    belongs_to:post
+end
+
+class Verb < ActiveRecord::Base
+    belongs_to:post
+end
+
+
+class Category < ActiveRecord::Base
+    belongs_to:post
+end
+
+class Comment < ActiveRecord::Base
+   belongs_to:user 
 end

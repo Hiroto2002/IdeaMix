@@ -3,7 +3,9 @@ Bundler.require
 require 'sinatra/reloader' if development?
 require './models'
 require 'dotenv/load'
-require 'itunes-search-api'
+require 'json'
+require 'sinatra'
+require 'sinatra/cross_origin'
 
 enable :sessions
 
@@ -15,6 +17,21 @@ before do
         config.api_secret = ENV['CLOUDINARY_API_SECRET']
     end
 end
+
+get '/api/data' do
+  # データの取得や処理を行う
+  data = [
+    { id: 1, name: 'Item 1' },
+    { id: 2, name: 'Item 2' },
+    { id: 3, name: 'Item 3' }
+  ]
+  
+  # レスポンスデータをJSONとして返す
+  json_response = data.to_json
+  content_type :json
+  json_response
+end
+
 
 get '/' do
     posts = []

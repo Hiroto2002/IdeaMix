@@ -10,32 +10,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_17_094510) do
+ActiveRecord::Schema.define(version: 2023_05_22_032251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "likes", force: :cascade do |t|
-    t.integer "post_id"
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "comment"
     t.integer "user_id"
+    t.integer "post_id"
+    t.datetime "created_at"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+  end
+
+  create_table "nouns", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string "artist"
-    t.string "album"
-    t.string "music"
-    t.string "link"
-    t.string "img"
-    t.string "comment"
-    t.string "user_id"
+    t.string "title"
+    t.integer "noun_id"
+    t.integer "verb_id"
+    t.text "context"
+    t.text "question"
+    t.integer "category_id"
+    t.boolean "is_open"
+    t.integer "user_id"
+    t.datetime "created_at"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
+    t.string "email"
     t.string "password_digest"
     t.string "img"
+    t.datetime "created_at"
   end
 
+  create_table "verbs", force: :cascade do |t|
+    t.string "name"
+  end
+
+  add_foreign_key "comments", "users", on_delete: :cascade
   add_foreign_key "likes", "posts", on_delete: :cascade
   add_foreign_key "likes", "users", on_delete: :cascade
 end
