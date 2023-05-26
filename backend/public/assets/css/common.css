@@ -1,0 +1,14 @@
+input{
+    border-radius:5px;
+    border:none;
+    background:#fff;
+    padding:5px 10px ;
+}
+main{
+    background:#f6f6f6;
+    min-height:88%;
+}
+button{
+    border-radius:10px;
+    border:2px #fff solid;
+}

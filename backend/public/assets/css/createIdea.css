@@ -1,0 +1,25 @@
+#create{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    top:37vh;
+}
+#create article{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+#create article input{
+    font-size:2rem;
+    text-align:center;
+    margin:0 50px 50px 50px;
+}
+
+#create article button{
+    background:#ff66cc;
+    color:#f6f6f6;
+    width:150px;
+    font-size:1.4rem;
+    padding:10px;
+}

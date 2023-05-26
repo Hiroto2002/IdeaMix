@@ -1,0 +1,58 @@
+header{
+    height:12%;
+    background:	#330066;
+}
+nav{
+    display:flex;
+    width:100%;
+    align-items:center;
+    height:100%;
+}
+nav #logo{
+    height:10vh;
+    width:10vh;
+    margin:0 0 0 2%;
+    cursor:pointer;
+}
+nav label{
+    height:5vh;
+    position:relative;
+    left:30%;
+    width:360px;
+}
+nav input{
+    height:5vh;
+    width:100%;
+    padding-left:9%;
+}
+nav #search_icon{
+    width:14px;
+    height:14px;
+    position:absolute;
+    left:3%;
+    top:24%;
+    z-index:2;
+}
+nav #user_icon{
+    height:5vh;
+    position:relative;
+    left:47%;
+    width:40px;
+    height:40px;
+    background:#fff;
+    border-radius:50%;
+}
+nav button{
+    position:relative;
+    left:50%;
+    border-radius:10px;
+    border:2px #fff solid;
+    color:#fff;
+    padding:6px 16px;
+    background:transparent;
+    transition: background-color linear 0.2s;
+}
+nav button:hover{
+    background:#fff;
+    color:#330066;
+}
