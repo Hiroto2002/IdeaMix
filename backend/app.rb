@@ -74,6 +74,12 @@ get '/signout' do
     redirect '/'
 end
 
+get '/createIdea' do
+    
+    erb :createIdea
+end
+
+
 get '/search' do
     unless params[:keyword].to_s.empty?
         @musics = ITunesSearchAPI.search(
