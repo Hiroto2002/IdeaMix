@@ -1,11 +1,94 @@
-
+<section id='result'>
+    <article>
+        <p id='idea'></p>
+        <button id='result-button' class='random'>ランダム</button>
+        <button id='go-post'>決定</button>
+    </article>
+</section>
 <section id='create'>
     <article>
-        <input type='text' placeholder='何を' id='noun-input'/>
-        <button id='noun-button'>ランダム</button>
+        <input type='text' placeholder='何を' id='noun-input' value='' />
+        <button id='noun-button' class='random'>ランダム</button>
     </article>
     <article>
-        <input type='text' placeholder='どうする？' id='verb-input'/>
-        <button id='verb-button'>ランダム</button>
+        <input type='text' placeholder='どうする？' id='verb-input' value='' />
+        <button id='verb-button' class='random'>ランダム</button>
     </arcticle>
+    <button id='create_idea'>生成</button>
 </section>
+
+
+<script>
+
+// randomを反映
+    const newInputValue=(id,val)=>{
+        $(`#${id}`).val(val)
+    }
+// ランダム生成
+    const getRandom = async(path) =>{
+        await fetch(path)
+            .then(res=>res.json())
+            .then(data=>{
+                const {noun,verb} = data 
+                const idea = noun + "を" + verb ;
+                if(noun){
+                    newInputValue("noun-input",noun)
+                }
+                if(verb){
+                    newInputValue("verb-input",verb)
+                }
+                
+                if(noun && verb){
+                    $('#idea').text(idea);
+                }
+            })
+    }
+    
+    $('#result-button').on("click",()=>{
+        getRandom("/random_idea")
+    })
+
+
+    $('#create_idea').on('click',()=>{
+        
+        const noun = $('#noun-input').val()
+        const verb = $('#verb-input').val()
+        if (!noun || !verb){
+            alert('入力してください');
+            return;
+        }
+        
+        const idea = noun + "を" + verb ;
+        $('#idea').text(idea);
+        
+        
+        $('#result').css('display', 'flex');
+        $('#result').hide().fadeIn('slow');
+        $('html, body').animate({ scrollTop: 0 }, 'slow');
+        // $('#create').stop().animate(
+        //   {
+        //     'top': '500px'
+        //     },
+        //     {
+        //         duration:500,
+        //         complete:function(){
+        //             $('#result').css('display', 'flex');
+        //         }
+        //     }
+        // )
+    });
+    $("#go-post").on('click',()=>{
+        const noun = $('#noun-input').val()
+        const verb = $('#verb-input').val()
+        
+       $.post("/idea", {"noun": noun, "verb": verb}, function(response) {
+          console.log(response);
+          if (response.success){
+              window.location.href = "/createPost?noun=" + noun + "&verb=" + verb;
+          }else{
+              alert("失敗しました")
+          }
+        });
+    })
+</script>
+

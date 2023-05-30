@@ -79,6 +79,20 @@ get '/createIdea' do
     erb :createIdea
 end
 
+get '/createPost' do
+    erb :createPost
+end
+
+get '/random_idea' do
+    noun = Noun.order("RANDOM()").first
+    verb = Verb.order("RANDOM()").first 
+    content_type:json    
+    {noun: noun.name,verb: verb.name}.to_json
+end
+
+
+
+
 
 get '/search' do
     unless params[:keyword].to_s.empty?
@@ -193,6 +207,38 @@ post '/signup' do
     }
     
     redirect '/search'
+end
+
+post '/idea' do
+    
+    noun = Noun.find_by(name: params[:noun])
+    verb = Verb.find_by(name: params[:verb])
+    content_type :json
+    success = true
+
+    if noun.nil? 
+      noun = Noun.create(name: params[:noun])
+      unless noun.persisted?
+        success = false
+      end
+    end
+
+    if verb.nil?
+      verb = Verb.create(name: params[:verb])
+      unless verb.persisted?
+        success = false
+      end
+    end
+
+    response_body = 
+    if success
+        { success: 'Data received and stored successfully' }.to_json
+    else
+        { error: 'Failed to store data' }.to_json
+    end
+
+    response_body
+    # redirect "/createPost?noun=#{noun}&verb=#{verb}" 
 end
 
 post '/post' do
