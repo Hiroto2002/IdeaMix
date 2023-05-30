@@ -84,7 +84,7 @@
        $.post("/idea", {"noun": noun, "verb": verb}, function(response) {
           console.log(response);
           if (response.success){
-              window.location.href = "/createPost?noun=" + noun + "&verb=" + verb;
+              window.location.href = "/createPost?noun_id=" + response.noun_id + "&verb_id=" + response.verb_id;
           }else{
               alert("失敗しました")
           }

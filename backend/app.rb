@@ -80,6 +80,10 @@ get '/createIdea' do
 end
 
 get '/createPost' do
+    noun = Noun.find_by(id: params[:noun_id])
+    verb = Verb.find_by(id: params[:verb_id])
+    @noun_name = noun.name
+    @verb_name = verb.name
     erb :createPost
 end
 
@@ -88,23 +92,6 @@ get '/random_idea' do
     verb = Verb.order("RANDOM()").first 
     content_type:json    
     {noun: noun.name,verb: verb.name}.to_json
-end
-
-
-
-
-
-get '/search' do
-    unless params[:keyword].to_s.empty?
-        @musics = ITunesSearchAPI.search(
-              :term    => params[:keyword],
-              :country => 'jp',
-              :media   => 'music',
-              :lang    => 'ja_jp',
-              :limit  => '10'
-        )
-    end
-    erb :search
 end
 
 get '/home' do
@@ -232,7 +219,7 @@ post '/idea' do
 
     response_body = 
     if success
-        { success: 'Data received and stored successfully' }.to_json
+        { success: 'Data received and stored successfully',noun_id: noun.id,verb_id: verb.id }.to_json
     else
         { error: 'Failed to store data' }.to_json
     end
@@ -242,16 +229,20 @@ post '/idea' do
 end
 
 post '/post' do
-    Post.create(
-        artist: params[:artistName],
-        album: params[:collectionName],
-        music: params[:trackName],
-        link: params[:previewUrl],
-        img: params[:artworkUrl100],
-        comment: params[:comment],
+    postData = Post.create(
+        title: params[:title],
+        noun_id: params[:noun_id],
+        verb_id: params[:verb_id],
+        context: params[:context],
+        question: params[:question],
+        category_id: params[:category_id],
+        is_open: params[:is_open],
         user_id: session[:user][:id]
     )
-    redirect '/home'
+    
+    if postData.persisted?
+        redirect '/'
+    end
 end
 
 post '/post/:id/edit' do

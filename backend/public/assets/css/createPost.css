@@ -16,7 +16,7 @@
 }
 #create-post input[name='context'],
 #create-post input[name='question']{
-    height:150px;
+    padding:10px 0 140px 10px;
 }
 #open{
     border-radius:5px;

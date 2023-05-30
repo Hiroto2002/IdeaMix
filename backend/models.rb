@@ -4,6 +4,16 @@ Bundler.require
 ActiveRecord::Base.establish_connection
 
 class Post < ActiveRecord::Base
+    validates :title,
+        presence:true
+    validates :noun_id,
+        presence:true
+    validates :verb_id,
+        presence:true
+    validates :user_id,
+        presence:true
+    validates :is_open,
+        presence:true
     has_many:likes
     has_many:users, :through => :likes
     belongs_to :user
@@ -30,10 +40,14 @@ class Like < ActiveRecord::Base
 end
 
 class Noun < ActiveRecord::Base
+    validates :name,
+        presence:true
     belongs_to:post
 end
 
 class Verb < ActiveRecord::Base
+    validates :name,
+        presence:true
     belongs_to:post
 end
 
