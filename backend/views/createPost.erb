@@ -1,0 +1,30 @@
+<form actoin='/createPost' method='post' id='create-post'>
+    <input type='text' name='title' placeholder='タイトル' value='<%=@noun_name%>を<%=@verb_name%>'/>
+    <input type='text' name='category' placeholder='カテゴリ'/>
+    <input type='text' name='context' placeholder='概要'/>
+    <input type='text' name='question' placeholder='解決する問題'/>
+    <label id='open'>
+        <span id='is_open_text'>非公開</span>
+        <input type='checkbox' name='is_open' id='is_open_input'>
+        <div id='checkbox-body' class='checkbox-body'>
+            <div id='checkbox-button' class='checkbox-button'></div>
+        </div>
+    </label>
+    <input type='submit' value='保存' class='submit_button'>
+</form>
+<script>
+    $('#is_open_input').on('change',()=>{
+        const is_checked = $('#is_open_input').prop("checked")
+        if(is_checked){
+            $('#checkbox-button').animate({
+                "left":"20px"
+            }, 100)
+            $('#checkbox-body').css({"background":"#330066"})
+        }else{
+            $('#checkbox-button').animate({
+                "left":"0"
+            }, 100)
+            $('#checkbox-body').css({"background":"#e6e6e6"})
+        }
+    })
+</script>

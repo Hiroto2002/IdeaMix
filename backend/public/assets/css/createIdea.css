@@ -28,13 +28,6 @@
 #create_idea{
     position:absolute;
     top: 74vh;
-    border:none;
-    background:#330066;
-    color:#fff;
-    width:20%;
-    left:40%;
-    font-size:1.6rem;
-    padding:10px;
 }
 
 #result{

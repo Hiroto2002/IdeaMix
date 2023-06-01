@@ -14,7 +14,7 @@
         <input type='text' placeholder='どうする？' id='verb-input' value='' />
         <button id='verb-button' class='random'>ランダム</button>
     </arcticle>
-    <button id='create_idea'>生成</button>
+    <button id='create_idea' class='submit_button'>生成</button>
 </section>
 
 
@@ -84,7 +84,7 @@
        $.post("/idea", {"noun": noun, "verb": verb}, function(response) {
           console.log(response);
           if (response.success){
-              window.location.href = "/createPost?noun=" + noun + "&verb=" + verb;
+              window.location.href = "/createPost?noun_id=" + response.noun_id + "&verb_id=" + response.verb_id;
           }else{
               alert("失敗しました")
           }
