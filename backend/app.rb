@@ -34,34 +34,7 @@ end
 
 
 get '/' do
-    posts = []
-    
-    Post.all.each do |value|
-        like_text = "いいねする"
-        # 投稿者
-        post_user_name = value.user.name
-        
-        # いいねした人達
-        like_users = Like.where(post_id: value.id)
-        p like_users
-        p "---------------------"
-        # 投稿にいいねしているのが自分だったら
-        unless session[:user].nil?
-            like_users.each do |like_user|
-                if like_user.user_id == session[:user][:id]
-                    like_text = "いいねを解除する"
-                end
-            end
-        end
-    
-        # いいねした人たちのimage
-        user_imges = like_users.map{|like_user|like_user.user.img}
-       
-        # 全てを配列に
-        posts << value.attributes.merge(user_imges: user_imges,user_name: post_user_name,like_text: like_text)
-    end
-    
-    @posts = posts
+    @posts = Post.all
     erb :index
 end
 
