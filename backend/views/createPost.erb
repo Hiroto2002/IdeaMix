@@ -1,11 +1,11 @@
-<form actoin='/post' method='post' id='create-post'>
+<form actoin='/createPost' method='post' id='create-post'>
     <input type='text' name='title' placeholder='タイトル' value='<%=@noun_name%>を<%=@verb_name%>'/>
     <input type='text' name='category' placeholder='カテゴリ'/>
     <input type='text' name='context' placeholder='概要'/>
     <input type='text' name='question' placeholder='解決する問題'/>
     <label id='open'>
         <span id='is_open_text'>非公開</span>
-        <input type='checkbox' name='open' id='is_open_input'>
+        <input type='checkbox' name='is_open' id='is_open_input'>
         <div id='checkbox-body' class='checkbox-body'>
             <div id='checkbox-button' class='checkbox-button'></div>
         </div>

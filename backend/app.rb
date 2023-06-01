@@ -197,7 +197,6 @@ post '/signup' do
 end
 
 post '/idea' do
-    
     noun = Noun.find_by(name: params[:noun])
     verb = Verb.find_by(name: params[:verb])
     content_type :json
@@ -228,16 +227,27 @@ post '/idea' do
     # redirect "/createPost?noun=#{noun}&verb=#{verb}" 
 end
 
-post '/post' do
+post '/createPost' do
+    category = Category.find_by(name: params[:category])
+    is_open = false
+    session[:user] ={ id:1}
+    
+    if params[:is_open]
+        is_open = true
+    end
+    
+    if category.nil?
+       category = Category.create(name: params[:category])
+    end
     postData = Post.create(
         title: params[:title],
-        noun_id: params[:noun_id],
-        verb_id: params[:verb_id],
+        noun_id: params[:noun_id].to_i,
+        verb_id: params[:verb_id].to_i,
         context: params[:context],
         question: params[:question],
-        category_id: params[:category_id],
-        is_open: params[:is_open],
-        user_id: session[:user][:id]
+        category_id: category.id,
+        is_open: is_open,
+        user_id: session[:user][:id].to_i
     )
     
     if postData.persisted?

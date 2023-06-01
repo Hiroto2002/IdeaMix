@@ -12,8 +12,6 @@ class Post < ActiveRecord::Base
         presence:true
     validates :user_id,
         presence:true
-    validates :is_open,
-        presence:true
     has_many:likes
     has_many:users, :through => :likes
     belongs_to :user
