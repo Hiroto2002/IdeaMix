@@ -8,19 +8,22 @@
 		<link rel="stylesheet" href="/assets/css/common.css">
 		<link rel="stylesheet" href="/assets/css/createIdea.css">
 		<link rel="stylesheet" href="/assets/css/createPost.css">
+		<link rel="stylesheet" href="/assets/css/index.css">
 		<!--<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">-->
 		<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 	</head>
 	<body>
 		<header>
 			<nav class="center-horizontal">
-				<img src="/assets/img/logo.png" alt="user_image" id='logo'/>
+				<a id='logo' href='/'>
+					<img src="/assets/img/logo.png" alt="user_image"/>
+				</a>
 				<label>
 					<img src='/assets/img/search_icon.png' alt='search icon' id='search_icon'>
 					<input type='text' placeholder='検索' />
 				</label>
 				<img src='/assets/img/search_icon.png' alt='user_icon' id='user_icon'>
-				<button>投稿する</button>
+				<a href='/createIdea' id ='header_post'>投稿する</a>
 			</nav>
 		</header>
 

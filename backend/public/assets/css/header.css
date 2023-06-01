@@ -42,7 +42,7 @@ nav #user_icon{
     background:#fff;
     border-radius:50%;
 }
-nav button{
+#header_post {
     position:relative;
     left:50%;
     border-radius:10px;
@@ -51,8 +51,9 @@ nav button{
     padding:6px 16px;
     background:transparent;
     transition: background-color linear 0.2s;
+    text-decoration:none;
 }
-nav button:hover{
+#header_post:hover{
     background:#fff;
     color:#330066;
 }
