@@ -1,0 +1,59 @@
+.signin_logo{
+    position:absolute;
+    left:0;
+    top:0;
+}
+.signup_container{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+.signup_container h1{
+     margin: 0 0 15px 0;
+}
+.signin_form{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.signin_form input{
+    margin:5px;
+    padding:10px;
+    width:330px;
+}
+.signin_form label{
+    cursor: pointer;
+}
+.sigin_user_icon{
+    border-radius:50%;
+    margin:0 0 30px 0;
+}
+.sigin_icon_plus{
+    position: absolute;
+    top: 115px;
+    left: 669px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius:50%;
+}
+.form_label{
+    display:flex;
+    justify-content: flex-end;
+    width: 330px;
+}
+.form_label p{
+    font-size:0.7rem;
+    color: #999;
+}
+.form_label a{
+    text-decoration:none;
+    color:#00c8fa;
+}
+.signin_form input[type='submit']{
+    margin:50px 0 0 0;
+    background:#330066;
+    color:#fff;
+}

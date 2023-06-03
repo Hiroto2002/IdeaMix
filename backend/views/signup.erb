@@ -1,12 +1,33 @@
-<div class="center-horizontal">
-    <div class="center-vertical">
-        <h1>新規登録</h1>
-        <form action="signup" method="post" enctype="multipart/form-data" class="signin-form">
-            <input type="text" name="name" placeholder="ユーザー名" required>
-            <input type="password" name="password" placeholder="パスワード" required>
-            <input type="password" name="password_confirm" placeholder="パスワードを確認" required>
-            <input type="file" name="file" accept="image/*">
-            <input type="submit" value="Sign up">
-        </form>
-    </div>
+<img src='/assets/img/logo.png' alt='logo' width='100px' height='100px' class='signin_logo'>
+<div class="signup_container">
+    <h1>会員登録</h1>
+    <form action="signup" method="post" enctype="multipart/form-data" class="signin_form">
+        <label>
+            <img src='/assets/img/default.svg' alt='icon' width='80px' height='80px' class='sigin_user_icon' id='signin_user_icon'/>
+            <img src='/assets/img/plus.svg' alt='icon' class='sigin_icon_plus'/>
+            <input type="file" name="file" accept="image/*" id='file_input'>
+        </label>
+        <input type="text" name="name" placeholder="ユーザー名" required>
+        <input type="text" name="email" placeholder="メールアドレス" required>
+        <input type="password" name="password" placeholder="パスワード" required>
+        <input type="password" name="password_confirm" placeholder="パスワードを確認" required>
+        <div class='form_label'>
+            <p>アカウントをもっている場合は<a href='/signin'>ログイン</a>から</p>
+        </div>
+        <input type="submit" value="登録">
+    </form>
 </div>
+<script>
+    
+$("#file_input").on("change",(e)=>{
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    
+    reader.onload = (e)=>{
+        console.log(e.target.result)
+        $('#signin_user_icon').attr('src',e.target.result);
+    }
+    
+    reader.readAsDataURL(file);
+})
+</script>
