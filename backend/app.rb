@@ -47,7 +47,14 @@ end
 
 get '/signout' do
     session[:user] = nil
-    redirect '/'
+    redirect '/siginin'
+end
+
+get '/signin' do
+    if session[:user]
+        redirect '/'
+    end
+    erb:signin
 end
 
 get '/createIdea' do
@@ -126,7 +133,7 @@ end
 
 
 post '/signin' do
-    user = User.find_by(name: params[:name])
+    user = User.find_by(email: params[:email])
     
     if user && user.authenticate(params[:password])
       session[:user] = {
@@ -135,7 +142,7 @@ post '/signin' do
         img: user.img,
       }
     end
-    redirect '/search'
+    redirect '/'
 end
 
 post '/signup' do
