@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="/assets/css/signup.css">
 		<!--<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">-->
 		<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+		<script src="assets/js/util.js"></script>
 	</head>
 	<body>
 		<% unless request.fullpath === "/signup" ||  request.fullpath ===  "/signin" %>
@@ -24,7 +25,7 @@
 						<img src='/assets/img/search_icon.png' alt='search icon' id='search_icon'>
 						<input type='text' placeholder='検索' />
 					</label>
-					<img src='/assets/img/search_icon.png' alt='user_icon' id='user_icon'>
+					<img src='<%=session[:user][:img]%>' alt='user_icon' id='user_icon'>
 					<a href='/createIdea' id ='header_post'>投稿する</a>
 				</nav>
 			</header>

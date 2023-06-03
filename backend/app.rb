@@ -34,7 +34,17 @@ end
 
 
 get '/' do
-    @posts = Post.all
+    posts = Post.all
+    new_posts = []
+    
+     posts.each do |_post|
+        # いいねした人達の数
+        like_count = Like.where(post_id: _post.id).count
+        user = User.find_by(id: _post.user_id)
+        new_posts << _post.attributes.merge("like_count": like_count,"user_img": user.img,"user_name": user.name)
+    end
+    
+    @posts = new_posts
     erb :index
 end
 
@@ -77,67 +87,17 @@ get '/random_idea' do
     {noun: noun.name,verb: verb.name}.to_json
 end
 
-get '/home' do
-    likes = Like.where(user_id: session[:user][:id]).includes(:post)
-    posts = []
-    like_posts = []
-    
-    # userが投稿したもの
-    Post.where(user_id: session[:user][:id]).each do |user_post|
-        # いいねした人達
-        like_users = Like.where(post_id: user_post.id)
-        p like_users
-        # いいねした人たちのimage
-        user_imges = like_users.map{|like_user|like_user.user.img}
-        posts << user_post.attributes.merge("user_imges": user_imges)
-    end
-    
-    #いいねした投稿
-    likes.map(&:post).each do |like|
-        # いいねした人達
-        like_users = Like.where(post_id: like.id)
-        # # いいねした人たちのimage
-        user_imges = like_users.map{|like_user|like_user.user.img}
-        like_posts << like.attributes.merge("user_imges": user_imges)
-    end
-    
-    @posts = posts
-    @like_posts = like_posts
-    erb :home
-end
-
-get '/post/:id/delete' do
-    post_obj = Post.find_by(id:params[:id])
-    post_obj.delete
-    redirect "/home"
-end
-
 get '/post/:id/edit' do
     
     erb :edit
 end
-
-get '/post/:id/like' do
-    like = Like.where(user_id: session[:user][:id],post_id: params[:id]).first
-    
-    if like.nil?
-        Like.create(
-            user_id:session[:user][:id],
-            post_id: params[:id]
-        )
-    else 
-        like.delete
-    end
-    redirect '/home'
-end
-
 
 post '/signin' do
     user = User.find_by(email: params[:email])
     
     if user && user.authenticate(params[:password])
       session[:user] = {
-        name: params[:name],
+        name: user.name,
         id: user.id,
         img: user.img,
       }
@@ -175,7 +135,9 @@ post '/signup' do
     #     id: user.id,
     #     img: img_url,
     # }
-    redirect '/signin'
+    if user.persisted?
+        redirect '/signin'
+    end
 end
 
 post '/idea' do
@@ -237,6 +199,32 @@ post '/createPost' do
     end
 end
 
+post '/like' do
+    body = request.body.read
+    
+
+    id = JSON.parse(body)['id']
+    count = JSON.parse(body)['count']
+    content_type :json
+    
+    like = Like.where(user_id: session[:user][:id],post_id: id).first
+    
+    if like.nil?
+        Like.create(
+            user_id:session[:user][:id],
+            post_id: id
+        )
+        count+=1
+    else 
+        like.delete
+        count-=1
+    end
+    
+    { count: count}.to_json
+
+    
+end
+
 post '/post/:id/edit' do
     post_obj = Post.find_by(id: params[:id])
     post_obj.comment = params[:comment]
@@ -244,3 +232,4 @@ post '/post/:id/edit' do
     
     redirect '/home'
 end
+
