@@ -39,6 +39,9 @@ get '/' do
 end
 
 get '/signup' do
+    if session[:user]
+        redirect '/'
+    end
     erb :signup
 end
 
@@ -155,18 +158,17 @@ post '/signup' do
     
     user = User.create(
         name: params[:name],
+        email: params[:email],
         password: params[:password],
         password_confirmation: params[:password_confirm],
         img: img_url
     )
-    
-    session[:user] = {
-        name: params[:name],
-        id: user.id,
-        img: img_url,
-    }
-    
-    redirect '/search'
+    # session[:user] = {
+    #     name: params[:name],
+    #     id: user.id,
+    #     img: img_url,
+    # }
+    redirect '/signin'
 end
 
 post '/idea' do

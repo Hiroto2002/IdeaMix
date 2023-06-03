@@ -12,7 +12,7 @@ button{
     border-radius:10px;
     border:2px #fff solid;
 }
-input[type='checkbox']{
+input[type='checkbox'],input[type='file']{
     display:none;
 }
 .submit_button{
