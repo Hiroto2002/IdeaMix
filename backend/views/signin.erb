@@ -1,12 +1,59 @@
-<img src='/assets/img/logo.png' alt='logo' width='100px' height='100px' class='signin_logo'>
+<!--<img src='/assets/img/logo.png' alt='logo' width='100px' height='100px' class='signin_logo'>-->
 <div class="signup_container">
     <h1>ログイン</h1>
     <form action="signin" method="post" class="signin_form">
         <input type="text" name="email" placeholder="メールアドレス" required>
         <input type="password" name="password" placeholder="パスワード" required>
+        <!--<input type="text" name="email" placeholder="あだ名" required autocomplete="off">-->
+        <!--<input type="text" name="password" placeholder="将来の目標" required id='move' autocomplete="off">-->
         <div class='form_label'>
             <p>アカウントをもっていない場合は<a href='/signup'>会員登録</a>から</p>
         </div>
         <input type="submit" value="ログイン">
+        <!--<input type="submit" value="ログイン" id='submit' style="position:absolute;top:500px" data-id="top">-->
     </form>
 </div>
+<script>
+    
+    // $('#submit').mouseenter(()=>{
+    //     if($('#move').val()==='楽して稼ぎたい　できれば週休六日で年収一千万'){
+            
+    //         return;
+    //     }
+    //     const flg =  $('#submit').data("id")
+    //     if(flg === "top"){
+    //         $('#submit').animate(
+    //                 {
+    //                     "top":"600px"
+    //                 },
+    //                 {
+    //                     duration:100,
+    //                 }
+    //         )
+    //         $('#submit').data("id","bottom") 
+    //         return;
+    //     }else{
+    //         $('#submit').animate(
+    //                 {
+    //                     "top":"500px"
+    //                 },
+    //                 {
+    //                     duration:100,
+    //                 }
+    //         )
+    //         $('#submit').data("id","top") 
+    //     }
+    // })
+        
+    // $('#create').stop().animate(
+        //   {
+        //     'top': '500px'
+        //     },
+        //     {
+        //         duration:500,
+        //         complete:function(){
+        //             $('#result').css('display', 'flex');
+        //         }
+        //     }
+        // )
+</script>

@@ -1,7 +1,15 @@
 <div id='post_list_container'>
     <% @posts.each do |val| %>
-        <section class='post_record'>
-            <h1><%=val.title%></h1>
+        <section class='post_record' onclick="handlePushRouter('/post/<%=val["id"]%>')">
+            <div class='record_user_info'>
+                <img src='<%=val[:user_img]%>' alt='user_img' class='record_user_img'/>
+                <p class='record_user_name'><%=val[:user_name]%></p>
+            </div>
+            <h1><%=val["title"]%></h1>
+            <div class='record_like_info'  onclick="<%if session[:user]%> handleClickLike(event,'<%= val["id"] %>') <% end %>" id="<%= val["id"] %>">
+                <img src='/assets/img/like.svg' alt='like' class='record_like_icon' />
+                <p class='record_like_count'><%=val[:like_count]%></p>
+            </div>
         </section>
     <% end %>
 </div>
