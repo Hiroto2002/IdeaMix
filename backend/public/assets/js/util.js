@@ -1,4 +1,5 @@
 /*global fetch*/
+/*global $*/
 
 const postDB = async (url, body, fnc) => {
   try {
@@ -17,3 +18,17 @@ const postDB = async (url, body, fnc) => {
     console.log(error);
   }
 };
+
+const handleClickLike=(event,id)=>{
+    event.stopPropagation(); 
+    const count = $(`#${id} p`).text()
+    const body = {id:Number(id),count:Number(count)}
+    
+    postDB("/like",body,(data)=>{
+          $(`#${id} p`).text(data.count)
+    })
+}
+
+const handlePushRouter=(url)=> {
+    window.location.href = url;
+}

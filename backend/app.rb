@@ -68,7 +68,9 @@ get '/signin' do
 end
 
 get '/createIdea' do
-    
+     if session[:user].nil?
+        redirect '/signin'
+    end
     erb :createIdea
 end
 
@@ -92,6 +94,29 @@ get '/post/:id/edit' do
     erb :edit
 end
 
+get '/post/:id/delete' do
+    _post = Post.find_by(id: params[:id])
+    
+    if session[:user][:name] === _post.user.name
+        _post.delete
+        redirect '/'    
+    end
+    
+end
+
+get '/post/:id' do
+    _post = Post.find_by(id: params[:id])
+    like = Like.where(post_id: params[:id])
+    @post = _post
+    @user = _post.user
+    @like_count = like.count.to_i
+    erb :post
+end
+
+get '/profile' do
+    erb :profile
+end
+
 post '/signin' do
     user = User.find_by(email: params[:email])
     
@@ -101,8 +126,10 @@ post '/signin' do
         id: user.id,
         img: user.img,
       }
+        redirect '/'
+    else
+       redirect '/signin' 
     end
-    redirect '/'
 end
 
 post '/signup' do
@@ -232,4 +259,5 @@ post '/post/:id/edit' do
     
     redirect '/home'
 end
+
 

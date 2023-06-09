@@ -1,0 +1,58 @@
+<div id='detail_container'>
+    <div class='detail_nav'>
+        <div class='detail_like_info'  onclick="<%if session[:user]%> handleClickLike(event,'<%= @post.id.to_i %>') <% end %>" id="<%= @post.id.to_i %>">
+            <img src='/assets/img/like.svg' alt='like' class='detail_like_icon' />
+            <p class='record_like_count'><%=@like_count%></p>
+        </div>
+    </div>
+    <section id='detail_box'>
+        
+        <article id='detail_header'>
+            <div id='detail_user_info'>
+                <img src='<%=@user.img%>'/>
+                <p><%=@user.name%></p>
+            </div>
+            
+            <h1 id='detail_title'><%=@post.title%></h1>
+            
+            <img src='/assets/img/menu.svg' alt='menu' id='menu_icon'/>
+            
+            <div class='edit_box'>
+                <a href='/post/<%=@post.id.to_i%>/edit' id='post_edit'>編集</a>
+                <a href='/post/<%=@post.id.to_i%>/delete' id='post_delete'>削除</a>
+            </div>
+        </article>
+        
+        <article>
+            <h2>概要</h2>
+            <p><%=@post.context%></p>
+        </article>
+        
+        <article>
+            <h2>解決する問題</h2>
+            <p><%=@post.question%></p>
+        </article>
+        
+    </section>
+    
+    <section class='comment_area'>
+        
+        <article id='post_comment'>
+            <% if session[:user]%>
+                <img/>
+                <form action='/comment' method='post'>
+                    <input type='text' name='comment' placeholder='返信' required>
+                    <input type='submit' value='返信'>
+                </form> 
+            <%end%>
+        </article>
+        
+        <article class='comment_record'>
+                <div class='record_user_info'>
+                    <img src='' alt='user_img' class='record_user_img'/>
+                    <p class='record_user_name'>user_name</p>
+                </div>
+        </article>
+        
+    </section>
+</div>
