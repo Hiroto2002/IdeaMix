@@ -6,6 +6,7 @@ require 'dotenv/load'
 require 'json'
 require 'sinatra'
 require 'sinatra/cross_origin'
+require "openai"
 
 enable :sessions
 
@@ -34,14 +35,21 @@ end
 
 
 get '/' do
-    posts = Post.all
+    # posts = Post.where(is_open:true).order(id: "DESC")
+    posts = Post.where(is_open:false).order(id: "DESC")
     new_posts = []
     
      posts.each do |_post|
         # いいねした人達の数
-        like_count = Like.where(post_id: _post.id).count
+        like =  Like.where(post_id: _post.id)
+        isLike = session[:user] ? Like.find_by(user_id: session[:user][:id],post_id: _post.id) : false 
         user = User.find_by(id: _post.user_id)
-        new_posts << _post.attributes.merge("like_count": like_count,"user_img": user.img,"user_name": user.name)
+        new_posts << _post.attributes.merge(
+                                            "like_count": like.count,
+                                            "user_img": user.img,
+                                            "user_name": user.name,
+                                            "isLike": isLike ? "like" : "dislike"
+                                            )
     end
     
     @posts = new_posts
@@ -75,11 +83,27 @@ get '/createIdea' do
 end
 
 get '/createPost' do
+    unless session[:user]
+        redirect '/signin'
+    end
     noun = Noun.find_by(id: params[:noun_id])
     verb = Verb.find_by(id: params[:verb_id])
     @noun_name = noun.name
     @verb_name = verb.name
     erb :createPost
+end
+
+get '/random_noun' do
+    noun = Noun.order("RANDOM()").first
+    content_type:json    
+    {noun: noun.name}.to_json
+end
+
+
+get '/random_verb' do
+    verb = Verb.order("RANDOM()").first
+    content_type:json    
+    {verb: verb.name}.to_json
 end
 
 get '/random_idea' do
@@ -114,7 +138,26 @@ get '/post/:id' do
 end
 
 get '/profile' do
+    unless session[:user]
+        redirect '/signin'
+    end
+    posts = Post.all.order(id: "DESC")
+    new_posts = []
+    
+     posts.each do |_post|
+        # いいねした人達の数
+        like_count = Like.where(post_id: _post.id).count
+        user = User.find_by(id: _post.user_id)
+        new_posts << _post.attributes.merge("like_count": like_count,"user_img": user.img,"user_name": user.name)
+    end
+    
+    @posts = new_posts
     erb :profile
+end
+
+get '/logout' do
+    session[:user] = nil
+    redirect '/signin'
 end
 
 post '/signin' do
@@ -198,10 +241,37 @@ post '/idea' do
     # redirect "/createPost?noun=#{noun}&verb=#{verb}" 
 end
 
+post '/autoPost' do
+    
+    body = request.body.read
+    
+
+    title = JSON.parse(body)['title']
+    content_type :json
+    
+    prompt = <<-"EOS"
+        "#{title}"サービスに付いて考えます。次の各項目をkeyにしjsonに変換できる形で生成してください
+        overview:具体的な手法を含めた概要を200文字以下で
+        solution:.このサービスが解決する課題を200文字以下で
+    EOS
+    
+    # p prompt
+    
+    client = OpenAI::Client.new(access_token: ENV['GPT_API_KEY'])
+    
+    response = client.chat(
+        parameters: {
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: prompt}],
+            temperature: 0.7,
+    })
+    
+    { message: response.dig("choices", 0, "message", "content")}.to_json
+end
+
 post '/createPost' do
     category = Category.find_by(name: params[:category])
     is_open = false
-    session[:user] ={ id:1}
     
     if params[:is_open]
         is_open = true
@@ -261,3 +331,20 @@ post '/post/:id/edit' do
 end
 
 
+# get '/idea/drop' do
+#     Noun.delete_all
+#     Verb.delete_all
+# end
+
+get '/demo' do
+    # noun = ["食事", "配達", "オーダリング", "イノベーション", "テクノロジー"]
+    verb = ["高速化","辞めさせる","勉強","ゲーム化","共有","分担","スマホ一つで"]
+    # noun.each do |val|
+    #     Noun.create(name:val)
+    # end
+    
+     verb.each do |val|
+        Verb.create(name:val)
+    end
+    
+end

@@ -7,8 +7,11 @@
 </section>
 <section id='create'>
     <article>
-        <input type='text' placeholder='何を' id='noun-input' value='' />
+        <input type='text' placeholder='何' id='noun-input' value='' />
         <button id='noun-button' class='random'>ランダム</button>
+    </article>
+    <article>
+        <p>を</p>
     </article>
     <article>
         <input type='text' placeholder='どうする？' id='verb-input' value='' />
@@ -43,6 +46,15 @@
                 }
             })
     }
+    
+    $('#noun-button').on("click",()=>{
+        getRandom("/random_noun")
+    })
+    
+    
+    $('#verb-button').on("click",()=>{
+        getRandom("/random_verb")
+    })
     
     $('#result-button').on("click",()=>{
         getRandom("/random_idea")
