@@ -2,8 +2,8 @@
     display:flex;
     justify-content:center;
     align-items:center;
+    height:74vh;
     position:relative;
-    height:88vh;
 }
 
 #create article{
@@ -14,8 +14,14 @@
 #create article input{
     font-size:2rem;
     text-align:center;
-    margin:0 50px 50px 50px;
+    margin:10px 50px 50px 50px;
     width:300px;
+    box-shadow:2px 2px 3px -3px rgba(0,0,0,0.2);
+}
+#create article p{
+    font-size: 2rem;
+    position: absolute;
+    top: 36%;
 }
 
 .random{
@@ -24,10 +30,13 @@
     width:150px;
     font-size:1.4rem;
     padding:10px;
+    box-shadow:2px 2px 3px -2px rgba(0,0,0,0.2);
+    border:none;
+    margin:0 0 10px 0 ;
 }
 #create_idea{
     position:absolute;
-    top: 74vh;
+    top: 60vh;
 }
 
 #result{
