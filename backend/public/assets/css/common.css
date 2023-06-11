@@ -1,3 +1,19 @@
+body::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+body::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 100px;
+    display:none;
+    width:0px;
+}
+ 
+body::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 100px;
+}
+
 input{
     border-radius:5px;
     border:none;
@@ -7,6 +23,11 @@ input{
 main{
     background:#f6f6f6;
     min-height:88%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+    padding:50px 0;
 }
 button{
     border-radius:10px;
@@ -23,6 +44,7 @@ input[type='checkbox'],input[type='file']{
     left:40%;
     font-size:1.6rem;
     padding:10px;
+    box-shadow:2px 2px 3px -2px rgba(0,0,0,0.2);
 }
 .checkbox-body{
     cursor: pointer;

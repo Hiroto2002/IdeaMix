@@ -1,0 +1,36 @@
+<section id='profile_container'>
+    <article>
+        
+        <% if session[:user][:img] %>
+            <img src='<%=session[:user][:img]%>' alt='user_icon' id='profile_user_icon'/>
+        <% else %>
+            <img src="/assets/img/default.svg" alt='user_icon' id='profile_user_icon'/>
+        <% end %>
+        
+        <p id='user_name'><%=session[:user][:name]%></p>
+        
+        <div>
+            <button id='post_list'>投稿</button>
+            <button id='like_list'>いいね</button>
+        </div>
+        
+        <a href="/logout">
+            ログアウト    
+        </a>
+    
+    </article>
+    
+    <% @posts.each do |_post| %> 
+        <article class='post_record' onclick="handlePushRouter('/post/<%=_post["id"]%>')">
+            <div class='record_user_info'>
+                <img src='<%=_post[:user_img]%>' alt='user_img' class='record_user_img'/>
+                <p class='record_user_name'><%=_post[:user_name]%></p>
+            </div>
+            <h1><%=_post["title"]%></h1>
+            <div class='record_like_info'  onclick="<%if session[:user]%> handleClickLike(event,'<%= _post["id"] %>') <% end %>" id="<%= _post["id"] %>">
+                <img src='/assets/img/<%=_post[:isLike]%>.svg' alt='like' class='record_like_icon' />
+                <p class='record_like_count'><%=_post[:like_count]%></p>
+            </div>
+        </article>
+    <%end%>
+</section>

@@ -4,7 +4,7 @@
     top:0;
 }
 .signup_container{
-    height:100vh;
+    height:86vh;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -20,10 +20,10 @@
     align-items:center;
 }
 .signin_form input{
-    margin:5px;
+    margin:10px ;
     padding:10px;
     width:330px;
-    box-shadow: 0 0 3px 0  rgba(0,0,0,0.2);
+    box-shadow:2px 2px 3px -3px rgba(0,0,0,0.2);
 }
 .signin_form label{
     cursor: pointer;
@@ -35,8 +35,8 @@
 }
 .sigin_icon_plus{
     position: absolute;
-    top: 115px;
-    left: 669px;
+    top: 22vh;
+    left: 52.25vw;
     width: 20px;
     height: 20px;
     background: #fff;
@@ -59,4 +59,8 @@
     margin:50px 0 0 0;
     background:#330066;
     color:#fff;
+}
+
+#title{
+    margin:0 0 50px 0;    
 }

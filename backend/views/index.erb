@@ -7,7 +7,7 @@
             </div>
             <h1><%=val["title"]%></h1>
             <div class='record_like_info'  onclick="<%if session[:user]%> handleClickLike(event,'<%= val["id"] %>') <% end %>" id="<%= val["id"] %>">
-                <img src='/assets/img/like.svg' alt='like' class='record_like_icon' />
+                <img src='/assets/img/<%=val[:isLike]%>.svg' alt='like' class='record_like_icon' />
                 <p class='record_like_count'><%=val[:like_count]%></p>
             </div>
         </section>
