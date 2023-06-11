@@ -48,7 +48,9 @@ const handleClickLike=(event,id)=>{
     
     postDB("/like",body,(data)=>{
           $(`#${id} p`).text(data.count)
+          $(`#${id} img`).attr("src",data.isLike)
     })
+    $()
 }
 
 const handlePushRouter=(url)=> {
