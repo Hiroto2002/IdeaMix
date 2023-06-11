@@ -312,12 +312,14 @@ post '/like' do
             post_id: id
         )
         count+=1
+        isLike = "/assets/img/like.svg"
     else 
         like.delete
         count-=1
+        isLike = '/assets/img/dislike.svg'
     end
     
-    { count: count}.to_json
+    { count: count,isLike: isLike}.to_json
 
     
 end

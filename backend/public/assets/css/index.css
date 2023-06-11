@@ -18,28 +18,35 @@
   flex-direction:column;
   align-items:center;
 }
+#post_list_container h1{
+  font-size:2rem;
+}
 .record_user_info{
   display:flex;
   position:absolute;
   top:30px;
   left:30px;
+  align-items:center
 }
 .record_user_name{
   margin:0 0 0 10px;
+  font-size:1.5rem;
 }
 .record_user_img{
-  width:30px;
+  width:50px;
 }
 .record_like_info{
   display:flex;
   position:absolute;
   bottom:30px;
   right:30px;
+  align-items: center;
 }
 .record_like_icon{
-  width:20px;
+  width:30px;
 }
 .record_like_count{
   margin:0 0 0 5px;
   color:rgb(223, 86, 86);
+  font-size:1.5rem;
 }
