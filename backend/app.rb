@@ -250,9 +250,9 @@ post '/autoPost' do
     content_type :json
     
     prompt = <<-"EOS"
-        "#{title}"サービスに付いて考えます。次の各項目をkeyにしjsonに変換できる形で生成してください
-        overview:具体的な手法を含めた概要を200文字以下で
-        solution:.このサービスが解決する課題を200文字以下で
+        "#{title}"サービスに付いて考えます。次の各項目をkeyにしjsonで生成してください
+        overview:具体的な手法を含めた概要を200文字以下
+        solution:.このサービスが解決する課題を200文字以下
     EOS
     
     # p prompt

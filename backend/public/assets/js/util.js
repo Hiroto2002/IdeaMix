@@ -19,6 +19,28 @@ const postDB = async (url, body, fnc) => {
   }
 };
 
+const requestGPT = async(url,body,fnc)=>{
+  try {
+    const request_body = JSON.stringify(body) 
+    
+    await fetch(url, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+       body: request_body
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      fnc(JSON.parse(data.message));
+      // fnc((data.message))
+    })
+  } catch (error) {
+    console.log(error);
+    fnc("error");
+  }
+};
+
 const handleClickLike=(event,id)=>{
     event.stopPropagation(); 
     const count = $(`#${id} p`).text()
