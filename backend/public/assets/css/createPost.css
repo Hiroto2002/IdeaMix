@@ -8,15 +8,19 @@
 }
 #create-post input{
     width:80%;
+    box-shadow:2px 2px 3px -3px rgba(0,0,0,0.2);
 }
 #create-post input[name='title'],
 #create-post input[name='category'],
 #open{
     height:60px;
 }
-#create-post input[name='context'],
-#create-post input[name='question']{
-    padding:10px 0 140px 10px;
+#create-post textarea{
+    padding:10px;
+    height:140px;
+    width:80%;
+    box-shadow:2px 2px 3px -3px rgba(0,0,0,0.2);
+    border:none;
 }
 #open{
     border-radius:5px;
@@ -30,4 +34,46 @@
 #create-post input[type='submit']{
     margin:30px 0 0 0;
     width:100px;
+}
+#auto-box{
+    display:flex;
+    position:fixed;
+    bottom:20px;
+    left:30px;
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0px 0px 2px 0px rgba(0,0,0,0.2);
+    padding:15px;
+    align-items:center;
+}
+#auto-box button{
+    color:#fff;
+    padding:5px;
+    width:75px;
+    margin:0 0 0 10px;
+}
+
+#yes-auto{
+    background:#ff66cc;
+}
+
+#no-auto{
+    background:#333;
+}
+#loading{
+    position:absolute;
+    width:100vw;
+    height:100vh;
+    z-index:999;
+    background:#00000075;
+    /*display:flex;*/
+    justify-content:center;
+    align-items:center;
+    top:0;
+    left:0;
+    display:none;
+}
+#loading p {
+    font-size:5rem;
+    color:#fff;
 }
