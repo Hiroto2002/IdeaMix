@@ -17,12 +17,18 @@
             
             <h1 id='detail_title'><%=@post.title%></h1>
             
-            <img src='/assets/img/menu.svg' alt='menu' id='menu_icon'/>
-            
-            <div class='edit_box' id='edit_box'>
-                <a href='/post/<%=@post.id.to_i%>/edit' id='post_edit'>編集</a>
-                <a href='/post/<%=@post.id.to_i%>/delete' id='post_delete'>削除</a>
-            </div>
+            <% if session[:user][:name] === @user.name %>
+                <div id='menu_icon'>
+                    <img src='/assets/img/menu.svg' alt='menu' />
+                </div>
+                
+                
+                <div id='edit_box'>
+                    <a href="/post/<%=@post.id.to_i%>/delete">
+                        削除    
+                    </a>
+                </div>
+            <% end  %>
         </article>
         
         <article class='contents-box'>
@@ -55,7 +61,7 @@
     </section>
 </div>
 <script>
-    // $("#menu_icon").on("click",()=>{
-    //     $("#edit_box").css("display","flex")
-    // })
+    $("#menu_icon").on("click",()=>{
+        $("#edit_box").toggle()
+    })
 </script>
