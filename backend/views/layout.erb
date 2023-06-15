@@ -24,10 +24,12 @@
 					<a id='logo' href='/'>
 						<img src="/assets/img/logo.png" alt="logo_image"/>
 					</a>
-					<label>
-						<img src='/assets/img/search_icon.png' alt='search icon' id='search_icon'>
-						<input type='text' placeholder='検索' />
-					</label>
+					<form action='/' method='get'>
+						<label>
+							<img src='/assets/img/search_icon.png' alt='search icon' id='search_icon'>
+							<input type='search' placeholder='検索' id='search_input' name='keyword'/>
+						</label>
+					</form>
 					<% if session[:user] %>
 						<% if session[:user][:img] %>
 							<a href='/profile?tab=post' id='user_icon'>
