@@ -29,11 +29,11 @@
 					</label>
 					<% if session[:user] %>
 						<% if session[:user][:img] %>
-							<a href='/profile' id='user_icon'>
+							<a href='/profile?tab=post' id='user_icon'>
 								<img src="<%=session[:user][:img]%>" alt="user_icon" />
 							</a>
 						<% else %>
-							<a href='/profile' id='user_icon'>
+							<a href='/profile?tab=post' id='user_icon'>
 								<img src="/assets/img/default.svg" alt="user_icon"/>
 							</a>
 						<% end %>

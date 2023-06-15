@@ -143,15 +143,31 @@ get '/profile' do
     unless session[:user]
         redirect '/signin'
     end
-    posts = Post.all.order(id: "DESC")
+    posts = []
     new_posts = []
     
-     posts.each do |_post|
-        # いいねした人達の数
-        like_count = Like.where(post_id: _post.id).count
-        user = User.find_by(id: _post.user_id)
-        new_posts << _post.attributes.merge("like_count": like_count,"user_img": user.img,"user_name": user.name)
+    if params[:tab] === "post"
+        posts = Post.where(user_id:session[:user][:id]).order(id: "DESC")
+        posts.each do |_post|
+            # いいねした人達の数
+            isLike = session[:user] ? Like.find_by(user_id: session[:user][:id],post_id: _post.id) : false 
+            like_count = Like.where(post_id: _post.id).count
+            user = User.find_by(id: _post.user_id)
+            new_posts << _post.attributes.merge("like_count": like_count,"user_img": user.img,"user_name": user.name,"isLike": isLike ? "like" : "dislike")
+        end
+    else
+        likes = Like.where(user_id:session[:user][:id]).order(id: "DESC")
+          likes.each do |like|
+            post_info = like.post
+            isLike = session[:user] ? Like.find_by(user_id: session[:user][:id],post_id: post_info.id) : false 
+            like_count = Like.where(post_id: post_info.id).count
+            user = User.find_by(id: post_info.user_id)
+            new_posts << post_info.attributes.merge("like_count": like_count,"user_img": user.img,"user_name": user.name,"isLike": isLike ? "like" : "dislike")
+        end
     end
+    
+    
+     
     
     @posts = new_posts
     erb :profile
