@@ -131,6 +131,8 @@ end
 get '/post/:id' do
     _post = Post.find_by(id: params[:id])
     like = Like.where(post_id: params[:id])
+    comments = Comment.where(post_id: params[:id].to_i).order(id:"DESC")
+    @comments = comments
     @post = _post
     @user = _post.user
     @like_count = like.count.to_i
@@ -187,7 +189,7 @@ post '/signup' do
          redirect '/signup'
     end    
     
-    img_url = ''
+    img_url = '/assets/img/default.svg'
     img = params[:file]
     tempfile = img[:tempfile]
     upload = Cloudinary::Uploader.upload(tempfile.path)
@@ -332,21 +334,12 @@ post '/post/:id/edit' do
     redirect '/home'
 end
 
-
-# get '/idea/drop' do
-#     Noun.delete_all
-#     Verb.delete_all
-# end
-
-get '/demo' do
-    # noun = ["食事", "配達", "オーダリング", "イノベーション", "テクノロジー"]
-    verb = ["高速化","辞めさせる","勉強","ゲーム化","共有","分担","スマホ一つで"]
-    # noun.each do |val|
-    #     Noun.create(name:val)
-    # end
-    
-     verb.each do |val|
-        Verb.create(name:val)
-    end
-    
+post '/comment/:id' do
+    Comment.create(
+        comment: params[:comment],
+        user_id: session[:user][:id],
+        post_id:params[:id]
+    )
+    redirect "/post/#{params[:id]}#post_comment"
 end
+
