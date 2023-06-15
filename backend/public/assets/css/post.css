@@ -68,8 +68,19 @@
     position:absolute;
     right:40px;
 }
-.edit_box{
-    display:none;    
+#edit_box{
+    display:none;
+    position:absolute;
+    top:60px;
+    background:#fff;
+    border:1px solid #00000040;
+    right:10px;
+    border-radius:5px;
+    padding:10px;
+}
+#edit_box a{
+    color:rgb(223, 86, 86);
+    text-decoration:none;
 }
 .contents-box{
     margin:0 0 100px 0;
