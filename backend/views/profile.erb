@@ -1,23 +1,26 @@
 <section id='profile_container'>
     <article>
-        
         <% if session[:user][:img] %>
             <img src='<%=session[:user][:img]%>' alt='user_icon' id='profile_user_icon'/>
         <% else %>
             <img src="/assets/img/default.svg" alt='user_icon' id='profile_user_icon'/>
         <% end %>
         
-        <p id='user_name'><%=session[:user][:name]%></p>
+        <p id='profile_user_name'><%=session[:user][:name]%></p>
         
-        <div>
-            <button id='post_list'>投稿</button>
-            <button id='like_list'>いいね</button>
+        <div id='profile_tab'>
+            <a href='?tab=post' style="<%= params[:tab]==="post" ? "color:#000;": "color:#aaa;" %>">投稿</a>
+            <a href='?tab=like' style="<%= params[:tab]==="like" ? "color:#000;": "color:#aaa;" %>">いいね</a>
         </div>
         
-        <a href="/logout">
-            ログアウト    
-        </a>
-    
+        <div id='profile_edit_box'>
+            <a href="/logout">
+                ログアウト    
+            </a>
+        </div>
+        <div  id='profile_menu_icon'>
+            <img src='/assets/img/menu.svg' alt='menu'/>
+        </div>
     </article>
     
     <% @posts.each do |_post| %> 
@@ -34,3 +37,8 @@
         </article>
     <%end%>
 </section>
+<script>
+    $("#profile_menu_icon").on("click",()=>{
+        $("#profile_edit_box").toggle()
+    })
+</script>

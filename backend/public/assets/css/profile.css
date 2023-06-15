@@ -7,7 +7,8 @@
     border-radius:20px;
     padding:30px;
     /*box-shadow:2px 2px 3px 0px rgba(0,0,0,0.2)*/
-    box-shadow:0 0 3px 0px rgba(0,0,0,0.2)
+    box-shadow:0 0 3px 0px rgba(0,0,0,0.2);
+    position:relative;
 }
 #profile_container article{
     display:flex;
@@ -19,4 +20,45 @@
     height:100px;
     border-radius:50%;
     box-shadow:0 0 3px 0px rgba(0,0,0,0.2)
+}
+#profile_user_name{
+    font-size:2rem;
+    margin:0 0 50px 0;
+}
+#profile_tab{
+    display:flex;
+    width:90vw;
+    justify-content: space-evenly
+}
+
+#profile_tab a{
+    width:50%;
+    color:#000;
+    background:#fff;
+    font-size:2rem;
+    cursor: pointer;
+    text-align:center;
+    text-decoration:none;
+}
+
+#profile_menu_icon{ 
+    width:20px;
+    padding:10px 0;
+    position:absolute;
+    right:40px;
+}
+
+#profile_edit_box{
+    display:none;
+    position:absolute;
+    top:60px;
+    background:#fff;
+    border:1px solid #00000040;
+    right:0px;
+    border-radius:5px;
+    padding:10px;
+}
+#profile_edit_box a{
+    color:rgb(223, 86, 86);
+    text-decoration:none;
 }
