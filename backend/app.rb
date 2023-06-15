@@ -37,13 +37,22 @@ end
 get '/' do
     # posts = Post.where(is_open:true).order(id: "DESC")
     posts = Post.where(is_open:false).order(id: "DESC")
+    
     new_posts = []
     
      posts.each do |_post|
+          
+        if params[:keyword]
+            unless _post.title.include?(params[:keyword]) || _post.categories.name.include?(params[:keyword])
+                next
+            end
+        end
+        
         # いいねした人達の数
         like =  Like.where(post_id: _post.id)
         isLike = session[:user] ? Like.find_by(user_id: session[:user][:id],post_id: _post.id) : false 
         user = User.find_by(id: _post.user_id)
+       
         new_posts << _post.attributes.merge(
                                             "like_count": like.count,
                                             "user_img": user.img,

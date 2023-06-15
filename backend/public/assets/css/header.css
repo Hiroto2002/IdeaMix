@@ -18,13 +18,13 @@ nav #logo{
     margin:0 0 0 2%;
     cursor:pointer;
 }
-nav label{
+nav form{
     height:5vh;
     position:relative;
     left:30%;
     width:360px;
 }
-nav input{
+#search_input{
     height:5vh;
     width:100%;
     padding-left:9%;
