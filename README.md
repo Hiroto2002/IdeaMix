@@ -1,4 +1,4 @@
-##IdeaMix
+## IdeaMix
 
 ### デプロイ済みのURL
 
@@ -40,3 +40,6 @@ https://ldeamix-production.up.railway.app/
 ### 動作風景
 
 準備中です...
+### 今後の展望
+
+frontをNextにリプレイスします
